@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Builder</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/builders}" th:object="${builders}">
+<!--    <label for="idOfEmployee">Enter id</label>-->
+<!--    <input type="text" th:field="*{idOfEmployee}" id="idOfEmployee"/>-->
+<!--    <div style="color: red" th:if="${#fields.hasErrors('idOfEmployee')}" th:errors="*{idOfEmployee}">Id error</div>-->
+    <br/>
+    <label for="surname">Enter surname</label>
+    <input type="text" th:field="*{surname}" id="surname"/>
+    <div style="color: red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname error</div>
+    <br/>
+    <label for="name">Enter name</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    <br/>
+    <label for="lustName">Enter lust name</label>
+    <input type="text" th:field="*{lustName}" id="lustName"/>
+    <div style="color: red" th:if="${#fields.hasErrors('lustName')}" th:errors="*{lustName}">Lust name error</div>
+    <br/>
+    <label for="email">Enter email</label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+    <br/>
+    <label for="salary">Enter salary</label>
+    <input type="text" th:field="*{salary}" id="salary"/>
+    <div style="color: red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}">Salary error</div>
+    <br/>
+    <input type="submit" value="Create Builder!"/>
+</form>
+</body>
+</html>

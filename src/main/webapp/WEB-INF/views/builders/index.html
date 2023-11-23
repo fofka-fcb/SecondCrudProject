@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<form th:method="GET" th:action="@{/start}">
+    <input type="submit" value="Back"/>
+</form>
+<br>
+<form th:method="GET" th:action="@{/builders/new}">
+    <input type="submit" value="Create new builder"/>
+</form>
+<br/>
+<div th:each="builder : ${builders}">
+    <a th:href="@{/builders/{id}(id=${builder.getIdOfEmployee()})}"
+            th:text="${builder.getIdOfEmployee() + ', ' + builder.getSurname() + ' ' + builder.getName()}">user</a>
+</div>
+</body>
+</html>

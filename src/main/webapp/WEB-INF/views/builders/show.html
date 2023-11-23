@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Current Builder</title>
+</head>
+<body>
+<br>
+<form th:method="GET" th:action="@{/builders}">
+    <input type="submit" value="Back"/>
+</form>
+<br>
+<form th:method="GET" th:action="@{/builders/{id}/edit(id=${builders.getIdOfEmployee()})}">
+    <input type="submit" value="Update builder"/>
+</form>
+<br>
+<form th:method="GET" th:action="@{/builders/{id}/editTime(id=${builders.getIdOfEmployee()})}">
+    <input type="submit" value="Update time">
+</form>
+<br>
+<form th:method="DELETE" th:action="@{/builders/{id}(id=${builders.getIdOfEmployee()})}">
+    <input type="submit" value="Delete builder"/>
+</form>
+<br>
+<p th:text="'ID of builder: ' + ${builders.getIdOfEmployee()}">VALUE</p>
+<p th:text="'Name of builder: ' + ${builders.getSurname() + ' ' + builders.getName() + ' ' + builders.getLustName()}">VALUE</p>
+<p th:text="'Email of builder: ' + ${builders.getEmail()}">VALUE</p>
+<p th:text="'Salary per hour of builder: ' + ${builders.getSalary()}">VALUE</p>
+<p th:text="'Work time in current month: ' + ${builders.getTimeOfWork()}">VALUE</p>
+</body>
+</html>

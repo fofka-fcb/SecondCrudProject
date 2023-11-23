@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Time</title>
+</head>
+<body>
+<form th:method="GET" th:action="@{/builders/{id}(id=${builder.getIdOfEmployee()})}">
+    <input type="submit" value="Back"/>
+</form>
+<br>
+<form th:method="POST" th:action="@{/builders/editTime/{id}(id=${builder.getIdOfEmployee()})}" th:object="${builder}">
+    <a th:text="${builder.getIdOfEmployee() + ', ' + builder.getSurname() + ' ' + builder.getName()}">user</a>
+    <br>
+    <a th:text="${builder.getTimeOfWork()}">current time</a>
+    <br/>
+    <label for="time">Enter time of work</label>
+    <input name="time" type="text" id="time"/>
+    <br>
+    <br>
+    <input type="submit" value="Update!"/>
+</form>
+</body>
+</html>
