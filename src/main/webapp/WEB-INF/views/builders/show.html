@@ -25,7 +25,8 @@
 <p th:text="'ID of builder: ' + ${builders.getIdOfEmployee()}">VALUE</p>
 <p th:text="'Name of builder: ' + ${builders.getSurname() + ' ' + builders.getName() + ' ' + builders.getLustName()}">VALUE</p>
 <p th:text="'Email of builder: ' + ${builders.getEmail()}">VALUE</p>
-<p th:text="'Salary per hour of builder: ' + ${builders.getSalary()}">VALUE</p>
+<p th:text="'Salary per hour of builder: ' + ${builders.getSalary()} + '$'">VALUE</p>
 <p th:text="'Work time in current month: ' + ${builders.getTimeOfWork()}">VALUE</p>
+<p style="color: blue" th:text="'Current salary this month: ' + ${builders.currentSalary()} + '$'">VALUE</p>
 </body>
 </html>

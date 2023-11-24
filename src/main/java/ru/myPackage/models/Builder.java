@@ -9,4 +9,7 @@ public class Builder extends Employee{
         super(idOfEmployer, surname, name, lustName, email, salary, timeOfWork);
     }
 
+    public double currentSalary() {
+        return getSalary() * getTimeOfWork();
+    }
 }
