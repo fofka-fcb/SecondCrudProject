@@ -3,10 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>StartPage</title>
+    <style>
+        #wrapper {
+            border: 1px;
+            width: 300px;
+            height: 20px;
+        }
+
+        #div1 {
+            display: inline-block;
+            width: 80px;
+            height: 20px;
+            border: 1px;
+        }
+
+        #div2 {
+            vertical-align: top;
+            display: inline-block;
+            width: 200px;
+            height: 20px;
+            border: 1px;
+        }
+
+        #div_text {
+            position: relative;
+            float: left;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
 </head>
 <body>
-<form th:method="GET" th:action="@{/builders}">
-    <input type="submit" value="Get builders"/>
-</form>
+<div id="wrapper">
+    <div id="div1">
+        <form th:method="GET" th:action="@{/builders}">
+            <input type="submit" value="Get builders"/>
+        </form>
+    </div>
+    <div id="div2">
+        <div id="div_text" th:text="'Count of builders: ' + ${countOfBuilders}"></div>
+    </div>
+</div>
 </body>
 </html>
