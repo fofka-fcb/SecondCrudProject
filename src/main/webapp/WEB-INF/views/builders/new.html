@@ -6,9 +6,6 @@
 </head>
 <body>
 <form th:method="POST" th:action="@{/builders}" th:object="${builders}">
-<!--    <label for="idOfEmployee">Enter id</label>-->
-<!--    <input type="text" th:field="*{idOfEmployee}" id="idOfEmployee"/>-->
-<!--    <div style="color: red" th:if="${#fields.hasErrors('idOfEmployee')}" th:errors="*{idOfEmployee}">Id error</div>-->
     <br/>
     <label for="surname">Enter surname</label>
     <input type="text" th:field="*{surname}" id="surname"/>
