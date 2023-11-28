@@ -59,17 +59,19 @@ public class BuilderController {
         return "builders/edit";
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{id}/update")
     public String update(@ModelAttribute("builders") @Valid Builder builder,
                          @PathVariable("id") String id,
                          BindingResult bindingResult) {
 
-        builderValidator.validate(builder, bindingResult);
+        if (!builder.getEmail().equals(modelsDAO.show(id).getEmail())) {
+            builderValidator.validate(builder, bindingResult);
+        }
 
-        if (bindingResult.hasErrors()) return "builders/new";
+        if (bindingResult.hasErrors()) return "builders/edit";
 
         modelsDAO.update(id, builder);
-        return "redirect:/builders";
+        return "redirect:/builders/{id}";
     }
 
     @DeleteMapping("/{id}")

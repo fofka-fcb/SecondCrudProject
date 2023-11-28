@@ -37,4 +37,7 @@ public abstract class Employee {
 
     private int timeOfWork;
 
+    private State state;
+
 }
+

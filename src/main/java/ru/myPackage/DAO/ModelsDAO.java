@@ -1,10 +1,10 @@
 package ru.myPackage.DAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.myPackage.models.Builder;
+import ru.myPackage.models.State;
 
 import java.util.List;
 
@@ -19,38 +19,45 @@ public class ModelsDAO {
     }
 
     public List<Builder> index() {
-        return jdbcTemplate.query("SELECT * FROM Builder", new BeanPropertyRowMapper<>(Builder.class));
+//        return jdbcTemplate.query("SELECT * FROM Builder", new BeanPropertyRowMapper<>(Builder.class));
+        return jdbcTemplate.query("SELECT * FROM Builder", new BuilderMapper());
     }
 
     public Builder show(String idOfEmployee) {
-        return jdbcTemplate.query("SELECT * FROM Builder WHERE id_of_employee=?", new Object[]{idOfEmployee}, new BeanPropertyRowMapper<>(Builder.class))
+//        return jdbcTemplate.query("SELECT * FROM Builder WHERE id_of_employee=?", new Object[]{idOfEmployee}, new BeanPropertyRowMapper<>(Builder.class))
+//                .stream().findAny().orElse(null);
+        return jdbcTemplate.query("SELECT * FROM Builder WHERE id_of_employee=?", new Object[]{idOfEmployee}, new BuilderMapper())
                 .stream().findAny().orElse(null);
     }
 
     public Builder showByEmail(String email) {
-        return jdbcTemplate.query("SELECT * FROM Builder WHERE email=?", new Object[]{email}, new BeanPropertyRowMapper<>(Builder.class))
+        return jdbcTemplate.query("SELECT * FROM Builder WHERE email=?", new Object[]{email}, new BuilderMapper())
                 .stream().findAny().orElse(null);
+//        return jdbcTemplate.query("SELECT * FROM Builder WHERE email=?", new Object[]{email}, new BeanPropertyRowMapper<>(Builder.class))
+//                .stream().findAny().orElse(null);
     }
 
     public void save(Builder builder) {
-        jdbcTemplate.update("INSERT INTO Builder (id_of_employee, surname, name, lust_name, email, salary, time_of_work) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Builder (id_of_employee, surname, name, lust_name, email, salary, time_of_work, sick_leave) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                 lustId(),
                 builder.getSurname(),
                 builder.getName(),
                 builder.getLustName(),
                 builder.getEmail(),
                 builder.getSalary(),
-                builder.getTimeOfWork());
+                builder.getTimeOfWork(),
+                State.NONE.toString());
     }
 
     public void update(String idOfEmployee, Builder updateBuilder) {
-        jdbcTemplate.update("UPDATE Builder SET surname=?, name=?, lust_name=?, email=?, salary=?, time_of_work=? WHERE id_of_employee=?",
+        jdbcTemplate.update("UPDATE Builder SET surname=?, name=?, lust_name=?, email=?, salary=?, time_of_work=?, sick_leave=? WHERE id_of_employee=?",
                 updateBuilder.getSurname(),
                 updateBuilder.getName(),
                 updateBuilder.getLustName(),
                 updateBuilder.getEmail(),
                 updateBuilder.getSalary(),
                 updateBuilder.getTimeOfWork(),
+                updateBuilder.getState().toString(),
                 idOfEmployee);
     }
 
@@ -68,7 +75,7 @@ public class ModelsDAO {
     }
 
     public String lustId() {
-        Builder builder = jdbcTemplate.query("SELECT * FROM Builder ORDER BY id_of_employee DESC LIMIT 1", new BeanPropertyRowMapper<>(Builder.class))
+        Builder builder = jdbcTemplate.query("SELECT * FROM Builder ORDER BY id_of_employee DESC LIMIT 1", new BuilderMapper())
                 .stream().findAny().orElse(null);
         if (builder != null) {
             String id = builder.getIdOfEmployee();

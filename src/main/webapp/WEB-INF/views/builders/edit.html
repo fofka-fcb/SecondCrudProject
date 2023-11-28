@@ -5,7 +5,12 @@
     <title>Edit Builder</title>
 </head>
 <body>
-<form th:method="PATCH" th:action="@{/builders/{id}(id=${builders.getIdOfEmployee()})}" th:object="${builders}">
+<form th:method="PATCH" th:action="@{/builders/{id}/update(id=${builders.getIdOfEmployee()})}" th:object="${builders}">
+    <br>
+    <label for="id">
+        <p th:text="${builders.getIdOfEmployee()}">VALUE</p>
+    </label>
+    <input type="hidden" th:field="*{idOfEmployee}" id="id"/>
     <br/>
     <label for="surname">Enter surname</label>
     <input type="text" th:field="*{surname}" id="surname"/>
@@ -27,6 +32,10 @@
     <input type="text" th:field="*{salary}" id="salary"/>
     <div style="color: red" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}">Salary error</div>
     <br/>
+    <label for="state">Enter sick</label>
+    <input type="text" th:field="*{state}" id="state"/>
+    <div style="color: red" th:if="${#fields.hasErrors('state')}" th:errors="*{state}">Sick leave error</div>
+    <br>
     <input type="submit" value="Update!"/>
 </form>
 </body>
