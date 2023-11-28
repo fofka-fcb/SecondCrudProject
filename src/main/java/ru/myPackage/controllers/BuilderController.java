@@ -55,12 +55,6 @@ public class BuilderController {
         return "redirect:/builders";
     }
 
-//    @GetMapping("/{id}/edit")
-//    public String edit(Model model, @PathVariable("id") String id) {
-//        model.addAttribute("builders", modelsDAO.show(id));
-//        return "builders/edit";
-//    }
-
     @GetMapping("/{id}/edit")
     public String edit(ModelMap modelMap, @PathVariable("id") String id) {
         modelMap.addAttribute("builders", modelsDAO.show(id));
