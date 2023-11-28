@@ -4,10 +4,12 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.myPackage.DAO.ModelsDAO;
 import ru.myPackage.models.Builder;
+import ru.myPackage.models.State;
 import ru.myPackage.utils.BuilderValidator;
 
 @Controller
@@ -53,9 +55,16 @@ public class BuilderController {
         return "redirect:/builders";
     }
 
+//    @GetMapping("/{id}/edit")
+//    public String edit(Model model, @PathVariable("id") String id) {
+//        model.addAttribute("builders", modelsDAO.show(id));
+//        return "builders/edit";
+//    }
+
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") String id) {
-        model.addAttribute("builders", modelsDAO.show(id));
+    public String edit(ModelMap modelMap, @PathVariable("id") String id) {
+        modelMap.addAttribute("builders", modelsDAO.show(id));
+        modelMap.addAttribute("states", State.values());
         return "builders/edit";
     }
 
