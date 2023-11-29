@@ -61,8 +61,8 @@
     <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
     <br/>
     <label for="lustName">Enter lust name</label>
-    <input type="text" th:field="*{lustName}" id="lustName"/>
-    <div style="color: red" th:if="${#fields.hasErrors('lustName')}" th:errors="*{lustName}">Lust name error</div>
+    <input type="text" th:field="*{lastName}" id="lustName"/>
+    <div style="color: red" th:if="${#fields.hasErrors('lustName')}" th:errors="*{lastName}">Lust name error</div>
     <br/>
     <label for="email">Enter email</label>
     <input type="text" th:field="*{email}" id="email"/>

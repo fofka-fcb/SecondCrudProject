@@ -5,8 +5,8 @@ public class Builder extends Employee implements Comparable<Builder>{
     public Builder() {
     }
 
-    public Builder(String idOfEmployer, String surname, String name, String lustName, String email, double salary, int timeOfWork, State state) {
-        super(idOfEmployer, surname, name, lustName, email, salary, timeOfWork, state);
+    public Builder(String idOfEmployer, String surname, String name, String lastName, String email, double salary, int timeOfWork, State state) {
+        super(idOfEmployer, surname, name, lastName, email, salary, timeOfWork, state);
 
     }
 

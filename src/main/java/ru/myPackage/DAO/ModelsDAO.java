@@ -38,11 +38,11 @@ public class ModelsDAO {
     }
 
     public void save(Builder builder) {
-        jdbcTemplate.update("INSERT INTO Builder (id_of_employee, surname, name, lust_name, email, salary, time_of_work, sick_leave) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Builder (id_of_employee, surname, name, last_name, email, salary, time_of_work, sick_leave) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                 lustId(),
                 builder.getSurname(),
                 builder.getName(),
-                builder.getLustName(),
+                builder.getLastName(),
                 builder.getEmail(),
                 builder.getSalary(),
                 builder.getTimeOfWork(),
@@ -50,10 +50,10 @@ public class ModelsDAO {
     }
 
     public void update(String idOfEmployee, Builder updateBuilder) {
-        jdbcTemplate.update("UPDATE Builder SET surname=?, name=?, lust_name=?, email=?, salary=?, time_of_work=?, sick_leave=? WHERE id_of_employee=?",
+        jdbcTemplate.update("UPDATE Builder SET surname=?, name=?, last_name=?, email=?, salary=?, time_of_work=?, sick_leave=? WHERE id_of_employee=?",
                 updateBuilder.getSurname(),
                 updateBuilder.getName(),
-                updateBuilder.getLustName(),
+                updateBuilder.getLastName(),
                 updateBuilder.getEmail(),
                 updateBuilder.getSalary(),
                 updateBuilder.getTimeOfWork(),

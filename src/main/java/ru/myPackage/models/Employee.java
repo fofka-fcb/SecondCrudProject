@@ -26,7 +26,7 @@ public abstract class Employee {
 
     @NotEmpty(message = "Lust name should not be empty")
     @Size(min = 2, max = 30, message = "Lust name should be between 2 and 30 characters")
-    private String lustName;
+    private String lastName;
 
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
