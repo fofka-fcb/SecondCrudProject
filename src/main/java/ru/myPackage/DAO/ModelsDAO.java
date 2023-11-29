@@ -20,7 +20,7 @@ public class ModelsDAO {
 
     public List<Builder> index() {
 //        return jdbcTemplate.query("SELECT * FROM Builder", new BeanPropertyRowMapper<>(Builder.class));
-        return jdbcTemplate.query("SELECT * FROM Builder", new BuilderMapper());
+        return jdbcTemplate.query("SELECT * FROM Builder", new BuilderMapper()).stream().sorted().toList();
     }
 
     public Builder show(String idOfEmployee) {

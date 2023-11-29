@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
+    <link rel="stylesheet" href="/styles/index.css" media="screen">
 </head>
 <body>
 <form th:method="GET" th:action="@{/start}">
@@ -13,9 +14,15 @@
     <input type="submit" value="Create new builder"/>
 </form>
 <br/>
-<div th:each="builder : ${builders}">
+<div id="wrapper" th:each="builder : ${builders}">
+    <div id="switch" th:switch="${builder.getState().toString()}">
+        <div id="div1" th:case="'NONE'"></div>
+        <div id="div2" th:case="'NOT_SICK'"></div>
+        <div id="div3" th:case="'SICK'"></div>
+    </div>
     <a th:href="@{/builders/{id}(id=${builder.getIdOfEmployee()})}"
-            th:text="${builder.getIdOfEmployee() + ', ' + builder.getSurname() + ' ' + builder.getName()}">user</a>
+       th:text="${builder.getIdOfEmployee() + ', ' + builder.getSurname() + ' ' + builder.getName()}">
+    </a>
 </div>
 </body>
 </html>
