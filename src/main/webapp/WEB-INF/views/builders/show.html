@@ -27,7 +27,7 @@
 <p th:text="'Email of builder: ' + ${builders.getEmail()}">VALUE</p>
 <p th:text="'Salary per hour of builder: ' + ${builders.getSalary()} + '$'">VALUE</p>
 <p th:text="'Work time in current month: ' + ${builders.getTimeOfWork()} + 'H'">VALUE</p>
-<p style="color: blue" th:text="'Current salary this month: ' + ${builders.currentSalary()} + '$'">VALUE</p>
-<p style="color: red" th:text="'Sick leave ' + ${builders.getState()}">VALUE</p>
+<p th:text="'Current salary this month: ' + ${builders.currentSalary()} + '$'">VALUE</p>
+<p th:text="'Sick leave ' + ${builders.getState()}">VALUE</p>
 </body>
 </html>
