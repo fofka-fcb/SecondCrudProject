@@ -10,15 +10,15 @@
     <input type="submit" value="Back"/>
 </form>
 <br>
-<form th:method="GET" th:action="@{/builders/{id}/edit(id=${builders.getIdOfEmployee()})}">
+<form th:method="GET" th:action="@{/builders/{id}/edit(id=${builders.getId()})}">
     <input type="submit" value="Update builder"/>
 </form>
 <br>
-<form th:method="GET" th:action="@{/builders/{id}/editTime(id=${builders.getIdOfEmployee()})}">
+<form th:method="GET" th:action="@{/builders/{id}/editTime(id=${builders.getId()})}">
     <input type="submit" value="Update time">
 </form>
 <br>
-<form th:method="DELETE" th:action="@{/builders/{id}(id=${builders.getIdOfEmployee()})}">
+<form th:method="DELETE" th:action="@{/builders/{id}(id=${builders.getId()})}">
     <input type="submit" value="Delete builder"/>
 </form>
 <br>

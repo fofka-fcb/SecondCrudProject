@@ -14,6 +14,7 @@ public class BuilderMapper implements RowMapper<Builder> {
 
         Builder builder = new Builder();
 
+        builder.setId(rs.getInt("id"));
         builder.setIdOfEmployee(rs.getString("id_of_employee"));
         builder.setSurname(rs.getString("surname"));
         builder.setName(rs.getString("name"));

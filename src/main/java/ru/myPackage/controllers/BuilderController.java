@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.myPackage.DAO.ModelsDAO;
 import ru.myPackage.models.Builder;
 import ru.myPackage.models.State;
+import ru.myPackage.services.BuilderService;
 import ru.myPackage.utils.BuilderValidator;
 
 @Controller
@@ -20,21 +21,24 @@ public class BuilderController {
 
     private final BuilderValidator builderValidator;
 
+    private final BuilderService builderService;
+
     @Autowired
-    public BuilderController(ModelsDAO modelsDAO, BuilderValidator builderValidator) {
+    public BuilderController(ModelsDAO modelsDAO, BuilderValidator builderValidator, BuilderService builderService) {
         this.modelsDAO = modelsDAO;
         this.builderValidator = builderValidator;
+        this.builderService = builderService;
     }
 
     @GetMapping
     public String index(Model model) {
-        model.addAttribute("builders", modelsDAO.index());
+        model.addAttribute("builders", builderService.findAll());
         return "builders/index";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") String id, Model model) {
-        model.addAttribute("builders", modelsDAO.show(id));
+    public String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("builders", builderService.findOne(id));
         return "builders/show";
     }
 
@@ -51,49 +55,49 @@ public class BuilderController {
 
         if (bindingResult.hasErrors()) return "builders/new";
 
-        modelsDAO.save(builder);
+        builderService.save(builder);
         return "redirect:/builders";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(ModelMap modelMap, @PathVariable("id") String id) {
-        modelMap.addAttribute("builders", modelsDAO.show(id));
+    public String edit(ModelMap modelMap, @PathVariable("id") int id) {
+        modelMap.addAttribute("builders", builderService.findOne(id));
         modelMap.addAttribute("states", State.values());
         return "builders/edit";
     }
 
     @PatchMapping("/{id}/update")
     public String update(@ModelAttribute("builders") @Valid Builder builder,
-                         @PathVariable("id") String id,
+                         @PathVariable("id") int id,
                          BindingResult bindingResult) {
 
-        if (!builder.getEmail().equals(modelsDAO.show(id).getEmail())) {
+        if (!builder.getEmail().equals(builderService.findOne(id).getEmail())) {
             builderValidator.validate(builder, bindingResult);
         }
 
         if (bindingResult.hasErrors()) return "builders/edit";
 
-        modelsDAO.update(id, builder);
+        builderService.update(id, builder);
         return "redirect:/builders/{id}";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") String id) {
-        modelsDAO.delete(id);
+    public String delete(@PathVariable("id") int id) {
+        builderService.delete(id);
         return "redirect:/builders";
     }
 
     @GetMapping("/{id}/editTime")
-    public String getUpdateTime(Model model, @PathVariable("id") String id) {
-        model.addAttribute("builder", modelsDAO.show(id));
+    public String getUpdateTime(Model model, @PathVariable("id") int id) {
+        model.addAttribute("builder", builderService.findOne(id));
         return "builders/editTime";
     }
 
     @PostMapping("/editTime/{id}")
     public String updateTimeOfBuilder(@ModelAttribute("builders") Builder builder,
-                                      @PathVariable("id") String id,
+                                      @PathVariable("id") int id,
                                       @RequestParam("time") int time) {
-        modelsDAO.updateTime(id, time);
+        builderService.updateTime(id, time);
         return "redirect:/builders/{id}/editTime";
     }
 }

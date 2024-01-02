@@ -20,7 +20,7 @@
         <div id="div2" th:case="'NOT_SICK'"></div>
         <div id="div3" th:case="'SICK'"></div>
     </div>
-    <a th:href="@{/builders/{id}(id=${builder.getIdOfEmployee()})}"
+    <a th:href="@{/builders/{id}(id=${builder.getId()})}"
        th:text="${builder.getIdOfEmployee() + ', ' + builder.getSurname() + ' ' + builder.getName()}">
     </a>
 </div>

@@ -30,6 +30,11 @@ public class ModelsDAO {
                 .stream().findAny().orElse(null);
     }
 
+    public Builder showById(int id) {
+        return jdbcTemplate.query("SELECT * FROM Builder WHERE id=?", new Object[]{id}, new BuilderMapper())
+                .stream().findAny().orElse(null);
+    }
+
     public Builder showByEmail(String email) {
         return jdbcTemplate.query("SELECT * FROM Builder WHERE email=?", new Object[]{email}, new BuilderMapper())
                 .stream().findAny().orElse(null);
@@ -65,13 +70,13 @@ public class ModelsDAO {
         jdbcTemplate.update("DELETE FROM Builder WHERE id_of_employee=?", id);
     }
 
-    public void updateTime(String idOfEmployee, int time) {
-        Builder nowBuilder = show(idOfEmployee);
+    public void updateTime(int id, int time) {
+        Builder nowBuilder = showById(id);
         nowBuilder.setTimeOfWork(nowBuilder.getTimeOfWork() + time);
 
-        jdbcTemplate.update("UPDATE Builder SET time_of_work=? WHERE id_of_employee=?",
+        jdbcTemplate.update("UPDATE Builder SET time_of_work=? WHERE id=?",
                 nowBuilder.getTimeOfWork(),
-                nowBuilder.getIdOfEmployee());
+                nowBuilder.getId());
     }
 
     public String lustId() {
@@ -80,7 +85,7 @@ public class ModelsDAO {
         if (builder != null) {
             String id = builder.getIdOfEmployee();
             String resInt = String.valueOf(Integer.parseInt(id.substring(1)) + 1);
-            for (;;) {
+            for (; ; ) {
                 if (resInt.length() < 3) {
                     resInt = "0" + resInt;
                 } else break;

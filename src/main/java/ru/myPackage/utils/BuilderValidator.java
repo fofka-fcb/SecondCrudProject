@@ -6,15 +6,19 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.myPackage.DAO.ModelsDAO;
 import ru.myPackage.models.Builder;
+import ru.myPackage.services.BuilderService;
 
 @Component
 public class BuilderValidator implements Validator {
 
     private final ModelsDAO modelsDAO;
 
+    private final BuilderService builderService;
+
     @Autowired
-    public BuilderValidator(ModelsDAO modelsDAO) {
+    public BuilderValidator(ModelsDAO modelsDAO, BuilderService builderService) {
         this.modelsDAO = modelsDAO;
+        this.builderService = builderService;
     }
 
     @Override
@@ -29,7 +33,7 @@ public class BuilderValidator implements Validator {
 //        if (modelsDAO.show(builder.getIdOfEmployee()) != null) {
 //            errors.rejectValue("idOfEmployee", "", "This ID is already taken");
 //        }
-        if (modelsDAO.showByEmail(builder.getEmail()) != null) {
+        if (builderService.findByEmail(builder.getEmail()) != null) {
             errors.rejectValue("email", "", "This email is already taken");
         }
     }
